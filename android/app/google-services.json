@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "812979702426",
+    "project_id": "advanced-auth-with-flutter",
+    "storage_bucket": "advanced-auth-with-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812979702426:android:5a4b6c12ba8775350a2d23",
+        "android_client_info": {
+          "package_name": "com.somen.advanced_flutter_firebase_authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812979702426-9dso422a1imiaudflo5hsq2vdcqeg45c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.somen.advanced_flutter_firebase_authentication",
+            "certificate_hash": "82bb82ad37407fd0b8c7eeb8adbc77b64eea91e2"
+          }
+        },
+        {
+          "client_id": "812979702426-u9prs3obsrq0erotjtdomrupsoqgocq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk2NtpB8u1-CVLA6wUBNiPkX0DFVgrxuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812979702426-pm7cjmddjubrqbf95ccfte1q66kso4rb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

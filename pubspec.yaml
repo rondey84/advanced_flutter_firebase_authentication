@@ -1,15 +1,23 @@
 name: advanced_flutter_firebase_authentication
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  # State Management
   get: ^4.6.5
+  # Firebase
+  firebase_auth: ^4.4.2
+  firebase_core: ^2.10.0
+  # UI/UX
+  flutter_screenutil: ^5.7.0
+  google_fonts: ^4.0.4
+  flutter_svg: ^2.0.5
 
 dev_dependencies:
   flutter_test:
