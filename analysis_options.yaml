@@ -1,1 +1,11 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    avoid_type_to_string: true
+    empty_statements: true
+    prefer_void_to_null: true
+    await_only_futures: true
+    constant_identifier_names: false
