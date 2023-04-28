@@ -1,3 +1,4 @@
+import 'package:advanced_flutter_firebase_authentication/core/services/app_services.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/background_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +17,7 @@ class SplashScreen extends GetView<SplashController> {
       child: Center(
         child: SpinKitRipple(
           color: Colors.white30,
-          size: 0.2.sw,
+          size: controller.splashSize,
         ),
       ),
     );

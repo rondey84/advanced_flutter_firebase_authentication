@@ -42,7 +42,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Advanced Flutter & Firebase Authentication',
         getPages: AppPages.pages,
-        initialRoute: AppRoutes.HOME,
+        initialRoute: AppRoutes.SPLASH,
         theme: ThemeData(useMaterial3: true).copyWith(
           primaryColor: const Color(0xFFE58742),
           primaryColorLight: const Color(0xFFEDA53F),
