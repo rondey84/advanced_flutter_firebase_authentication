@@ -11,6 +11,8 @@ class AuthHelper {
   /// _isInitUserState is a flag that keeps track of whether the user's state has been initialized
   bool _isInitUserState = true;
 
+  GoogleSignIn? googleSignIn;
+
   /// This is the constructor for the AuthHelper class
   AuthHelper() {
     _auth = FirebaseAuth.instance;
@@ -71,8 +73,47 @@ class AuthHelper {
     }
   }
 
+  // ======= GOOGLE AUTHENTICATION =======
+  Future<void> signInWithGoogle() async {
+    googleSignIn ??= GoogleSignIn(scopes: ['email', 'profile']);
+
+    try {
+      final GoogleSignInAccount? gUser = await googleSignIn?.signIn();
+      final GoogleSignInAuthentication? gAuth = await gUser?.authentication;
+      // Get the google auth credentials
+      final credential = GoogleAuthProvider.credential(
+        accessToken: gAuth?.accessToken,
+        idToken: gAuth?.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+    } catch (e) {
+      googleSignIn?.signOut();
+      rethrow;
+    }
+  }
+
   // ======== SIGN OUT =========
   Future<void> signOut([User? oldUser]) async {
-    await _auth.signOut();
+    // Old user used for forcefully logging out a google/apple provider user.
+    try {
+      final signInProvider =
+          (oldUser ?? currentUser.value)?.providerData.first.providerId;
+      if (signInProvider == null) return;
+
+      print('SIGN IN PROVIDER: $signInProvider');
+
+      if (signInProvider == AuthMethod.google.signInProvider) {
+        googleSignIn ??= GoogleSignIn();
+        // IMPORTANT: Google SignOut Required to show the interactive popup again else it will automatically log me in with the same account 😅
+        googleSignIn?.signOut();
+      } else if (signInProvider == AuthMethod.facebook.signInProvider) {
+        // TODO: Figure out what to do on facebook sign out.
+      } else if (signInProvider == AuthMethod.apple.signInProvider) {
+        // TODO: Figure out what to do on apple sign out.
+      }
+    } finally {
+      await _auth.signOut();
+    }
   }
 }

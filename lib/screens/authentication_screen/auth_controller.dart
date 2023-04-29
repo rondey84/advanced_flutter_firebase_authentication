@@ -59,6 +59,10 @@ class AuthController extends GetxController {
   final passwordController = TextEditingController();
   final passwordObscure = true.obs;
 
+  void passwordVisibilityToggler() {
+    passwordObscure.value = !passwordObscure.value;
+  }
+
   Future<void> emailPassOnSubmitHandler() async {
     if (isAuthInProgressOrComplete) return;
     authState.value = _AuthState.inProgress;
@@ -90,7 +94,6 @@ class AuthController extends GetxController {
     } catch (e) {
       authState.value = _AuthState.initialized;
       debugPrint(e.toString());
-      // TODO: Show Toast with error message
     }
   }
 
@@ -109,7 +112,26 @@ class AuthController extends GetxController {
     return null;
   }
 
-  void passwordVisibilityToggler() {
-    passwordObscure.value = !passwordObscure.value;
+  // ========== GOOGLE SIGN IN ==========
+  Future<void> googleSignInHandler() async {
+    if (isAuthInProgressOrComplete) return;
+    authState.value = _AuthState.inProgress;
+
+    try {
+      // Google Sign In
+      await authService.signInWithGoogle();
+      authState.value = _AuthState.complete;
+    } on PlatformException catch (e) {
+      authState.value = _AuthState.initialized;
+      debugPrint(e.toString());
+      // TODO: Show Toast with error message
+    } on FirebaseAuthException catch (e) {
+      authState.value = _AuthState.initialized;
+      debugPrint(e.toString());
+      // TODO: Show Toast with error message
+    } catch (e) {
+      authState.value = _AuthState.initialized;
+      debugPrint(e.toString());
+    }
   }
 }

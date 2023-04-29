@@ -6,6 +6,7 @@ import 'package:advanced_flutter_firebase_authentication/widgets/buttons.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

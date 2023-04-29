@@ -11,7 +11,7 @@ class _FederatedLogins extends GetView<AuthController> {
         Expanded(
           child: SecondaryButton(
             maxHeight: 48,
-            onTap: () {},
+            onTap: controller.googleSignInHandler,
             child: FaIcon(
               FontAwesomeIcons.google,
               color: Colors.white.withOpacity(0.7),
