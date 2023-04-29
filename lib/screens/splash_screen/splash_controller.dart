@@ -14,7 +14,6 @@ class SplashController extends GetxController {
   @override
   void onReady() {
     if (appServices.initialized) {
-      // dispose();
       WidgetsBinding.instance.addPostFrameCallback((_) {
         appServices.initFirebaseServices();
       });

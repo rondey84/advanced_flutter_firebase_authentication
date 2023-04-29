@@ -35,7 +35,8 @@ class AppPages {
       page: () => const HomeScreen(),
       binding: HomeBindings(),
       preventDuplicates: true,
-      transition: Transition.fade,
+      transition: Transition.fadeIn,
+      transitionDuration: 400.milliseconds,
     ),
   ];
 }

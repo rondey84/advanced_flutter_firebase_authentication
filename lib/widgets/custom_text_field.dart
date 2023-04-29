@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.passwordVisibilityHandler,
     this.textInputAction,
     this.keyboardType,
+    this.validator,
     super.key,
   });
 
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final VoidCallback? passwordVisibilityHandler;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CustomTextField extends StatelessWidget {
       textInputAction: textInputAction,
       keyboardType: keyboardType,
       cursorColor: Get.theme.primaryColor,
+      validator: validator,
       style: TextHelper.textFieldTextStyle,
       obscureText: obscureText,
       decoration: InputDecoration(
@@ -71,7 +74,13 @@ class CustomTextField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-            color: Colors.red.withOpacity(0.3),
+            color: Colors.red.withOpacity(0.5),
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: BorderSide(
+            color: Colors.red.withOpacity(0.5),
           ),
         ),
         disabledBorder: OutlineInputBorder(
@@ -80,6 +89,8 @@ class CustomTextField extends StatelessWidget {
             color: Colors.white.withOpacity(0.05),
           ),
         ),
+        errorText: null,
+        errorStyle: const TextStyle(color: Colors.transparent, fontSize: 0),
       ),
     );
   }

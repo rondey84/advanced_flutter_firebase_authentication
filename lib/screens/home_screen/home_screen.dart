@@ -1,4 +1,5 @@
 import 'package:advanced_flutter_firebase_authentication/core/helper/text_helper.dart';
+import 'package:advanced_flutter_firebase_authentication/core/services/app_services.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/background_scaffold.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/buttons.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return BackgroundScaffold(
       backgroundBlur: 0,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -61,7 +63,10 @@ class HomeScreen extends GetView<HomeController> {
             SizedBox(height: 50.r),
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 200),
-              child: ElevatedGradButton(onTap: () {}, text: 'Sign Out'),
+              child: ElevatedGradButton(
+                onTap: controller.signOutHandler,
+                text: 'Sign Out',
+              ),
             ),
           ],
         ),
