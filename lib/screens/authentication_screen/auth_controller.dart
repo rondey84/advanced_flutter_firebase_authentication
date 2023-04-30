@@ -134,4 +134,27 @@ class AuthController extends GetxController {
       debugPrint(e.toString());
     }
   }
+
+  // ========== FACEBOOK SIGN IN ==========
+  Future<void> facebookSignInHandler() async {
+    if (isAuthInProgressOrComplete) return;
+    authState.value = _AuthState.inProgress;
+
+    try {
+      // Google Sign In
+      await authService.signInWithFacebook();
+      authState.value = _AuthState.complete;
+    } on PlatformException catch (e) {
+      authState.value = _AuthState.initialized;
+      debugPrint(e.toString());
+      // TODO: Show Toast with error message
+    } on FirebaseAuthException catch (e) {
+      authState.value = _AuthState.initialized;
+      debugPrint(e.toString());
+      // TODO: Show Toast with error message
+    } catch (e) {
+      authState.value = _AuthState.initialized;
+      debugPrint(e.toString());
+    }
+  }
 }

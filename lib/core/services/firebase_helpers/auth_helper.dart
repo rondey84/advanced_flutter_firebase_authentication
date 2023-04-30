@@ -93,6 +93,25 @@ class AuthHelper {
     }
   }
 
+  Future<void> signInWithFacebook() async {
+    try {
+      // Trigger the sign-in flow
+      final loginResult = await FacebookAuth.instance.login(
+        loginBehavior: LoginBehavior.nativeWithFallback,
+      );
+
+      // Create a credential from the access token
+      final facebookAuthCredential = FacebookAuthProvider.credential(
+        loginResult.accessToken!.token,
+      );
+
+      // Once signed in, return the UserCredential
+      FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   // ======== SIGN OUT =========
   Future<void> signOut([User? oldUser]) async {
     // Old user used for forcefully logging out a google/apple provider user.
@@ -108,11 +127,10 @@ class AuthHelper {
         // IMPORTANT: Google SignOut Required to show the interactive popup again else it will automatically log me in with the same account 😅
         googleSignIn?.signOut();
       } else if (signInProvider == AuthMethod.facebook.signInProvider) {
-        // TODO: Figure out what to do on facebook sign out.
-      } else if (signInProvider == AuthMethod.apple.signInProvider) {
-        // TODO: Figure out what to do on apple sign out.
+        await FacebookAuth.instance.logOut();
       }
     } finally {
+      // Providers sign-out not required for native sign-in's (email/password and phone)
       await _auth.signOut();
     }
   }

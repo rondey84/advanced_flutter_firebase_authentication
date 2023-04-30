@@ -6,4 +6,8 @@ class HomeController extends GetxController {
   Future<void> signOutHandler() async {
     await authService.signOut();
   }
+
+  Future<void> testHandler() async {
+    print(authService.currentUser.value?.providerData);
+  }
 }

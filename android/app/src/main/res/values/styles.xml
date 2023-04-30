@@ -15,4 +15,6 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
+    <string name="facebook_app_id">169425159389113</string>
+    <string name="facebook_client_token">1725978b1db7dee46694ab90e04ac83f</string>
 </resources>

@@ -68,6 +68,14 @@ class HomeScreen extends GetView<HomeController> {
                 text: 'Sign Out',
               ),
             ),
+            SizedBox(height: 20.r),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 200),
+              child: ElevatedGradButton(
+                onTap: controller.testHandler,
+                text: 'Test',
+              ),
+            ),
           ],
         ),
       ),
