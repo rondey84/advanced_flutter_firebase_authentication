@@ -50,6 +50,12 @@ class TextHelper {
     color: Colors.white70,
   );
 
+  static final textFieldHintTextStyle = GoogleFonts.openSans(
+    fontSize: 16.r,
+    fontWeight: FontWeight.w400,
+    color: Colors.white.withOpacity(0.5),
+  );
+
   static final pageSwitcherTextStyle = GoogleFonts.openSans(
     fontSize: 14.r,
     fontWeight: FontWeight.w400,
@@ -66,5 +72,29 @@ class TextHelper {
     fontSize: 48.r,
     fontWeight: FontWeight.w600,
     color: Colors.white,
+  );
+
+  static final dialogHeaderTextStyle = GoogleFonts.openSans(
+    color: Colors.white.withOpacity(0.85),
+    fontSize: 20.r,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final dialogCaptionTextStyle = GoogleFonts.openSans(
+    color: Colors.white38,
+    fontSize: 12.r,
+    fontStyle: FontStyle.italic,
+  );
+
+  static final captionButtonTextStyle = GoogleFonts.openSans(
+    color: Colors.white70,
+    fontSize: 12.r,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final countryPickerTextStyle = GoogleFonts.openSans(
+    color: Colors.white.withOpacity(0.9),
+    fontSize: 14.r,
+    fontWeight: FontWeight.normal,
   );
 }

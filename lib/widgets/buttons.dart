@@ -170,3 +170,54 @@ class ElevatedGradButton extends StatelessWidget {
     );
   }
 }
+
+class CaptionButton extends StatelessWidget {
+  const CaptionButton({
+    required this.onTap,
+    this.child,
+    this.text,
+    this.maxHeight = 32,
+    this.maxWidth = double.maxFinite,
+    super.key,
+  });
+
+  final VoidCallback? onTap;
+  final Widget? child;
+  final String? text;
+
+  final double maxHeight;
+  final double maxWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Material(
+        color: Colors.transparent,
+        shape: const StadiumBorder(),
+        child: InkWell(
+          onTap: onTap,
+          splashColor: Colors.white10,
+          splashFactory: InkRipple.splashFactory,
+          borderRadius: BorderRadius.circular(100),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            constraints: BoxConstraints(
+              maxHeight: maxHeight,
+              maxWidth: maxWidth,
+            ),
+            alignment: Alignment.center,
+            child: child ??
+                (text != null
+                    ? Text(
+                        text!,
+                        textAlign: TextAlign.center,
+                        style: TextHelper.captionButtonTextStyle,
+                      )
+                    : null),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,3 +1,4 @@
+import 'package:advanced_flutter_firebase_authentication/core/extensions/custom_dialog_extension.dart';
 import 'package:advanced_flutter_firebase_authentication/core/helper/text_helper.dart';
 import 'package:advanced_flutter_firebase_authentication/core/services/app_services.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/background_scaffold.dart';
@@ -15,6 +16,7 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final globalKey = GlobalKey<NavigatorState>();
     return BackgroundScaffold(
       backgroundBlur: 0,
       resizeToAvoidBottomInset: false,
@@ -41,43 +43,46 @@ class HomeScreen extends GetView<HomeController> {
           )
         ],
       ),
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Find new\nplaces\nto ',
-                style: TextHelper.homeTextStyle,
-                children: [
-                  TextSpan(
-                    text: 'Camp',
-                    style: TextHelper.homeTextStyle
-                        .copyWith(color: Get.theme.primaryColor),
-                  )
-                ],
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 200),
+            child: ElevatedGradButton(
+              key: globalKey,
+              text: 'TEST',
+              onTap: () async {
+                await Get.countrySelectDropDown(
+                  navigatorKey: globalKey,
+                );
+              },
             ),
-            SizedBox(height: 50.r),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 200),
-              child: ElevatedGradButton(
-                onTap: controller.signOutHandler,
-                text: 'Sign Out',
-              ),
+          ),
+          SizedBox(height: 20.r),
+          RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              text: 'Find new\nplaces\nto ',
+              style: TextHelper.homeTextStyle,
+              children: [
+                TextSpan(
+                  text: 'Camp',
+                  style: TextHelper.homeTextStyle
+                      .copyWith(color: Get.theme.primaryColor),
+                )
+              ],
             ),
-            SizedBox(height: 20.r),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 200),
-              child: ElevatedGradButton(
-                onTap: controller.testHandler,
-                text: 'Test',
-              ),
+          ),
+          SizedBox(height: 50.r),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 200),
+            child: ElevatedGradButton(
+              onTap: controller.signOutHandler,
+              text: 'Sign Out',
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

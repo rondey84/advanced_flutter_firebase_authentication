@@ -53,8 +53,9 @@ class AuthController extends GetxController {
   final pageAniDuration = 400.ms;
   final pageSwitchDuration = 275.ms;
 
-  // ======== EMAIL AND PASSWORD AUTHENTICATION ========
+  // ======== NATIVE AUTHENTICATION ========
   final formKey = GlobalKey<FormState>();
+  final phoneNumberController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordObscure = true.obs;
@@ -109,6 +110,10 @@ class AuthController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Please enter a password';
     }
+    return null;
+  }
+
+  String? phoneValidation(String? value) {
     return null;
   }
 

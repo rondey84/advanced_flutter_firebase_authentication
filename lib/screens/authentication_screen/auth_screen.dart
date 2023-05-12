@@ -3,6 +3,7 @@ import 'package:advanced_flutter_firebase_authentication/core/helper/text_helper
 import 'package:advanced_flutter_firebase_authentication/core/services/app_services.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/background_scaffold.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/buttons.dart';
+import 'package:advanced_flutter_firebase_authentication/core/extensions/custom_dialog_extension.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
