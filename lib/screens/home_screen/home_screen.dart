@@ -1,4 +1,5 @@
 import 'package:advanced_flutter_firebase_authentication/core/extensions/custom_dialog_extension.dart';
+import 'package:advanced_flutter_firebase_authentication/core/extensions/getx_custom_snackbar.dart';
 import 'package:advanced_flutter_firebase_authentication/core/helper/text_helper.dart';
 import 'package:advanced_flutter_firebase_authentication/core/services/app_services.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/background_scaffold.dart';
@@ -53,8 +54,14 @@ class HomeScreen extends GetView<HomeController> {
               key: globalKey,
               text: 'TEST',
               onTap: () async {
-                await Get.countrySelectDropDown(
-                  navigatorKey: globalKey,
+                // await Get.countrySelectDropDown(
+                //   navigatorKey: globalKey,
+                // );
+                Get.customSnackBar(
+                  statusType: StatusType.error,
+                  designType: SnackDesign.line,
+                  title: 'Reset email sent.',
+                  compact: true,
                 );
               },
             ),

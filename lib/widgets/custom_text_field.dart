@@ -1,5 +1,6 @@
 import 'package:advanced_flutter_firebase_authentication/core/helper/text_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -19,6 +20,8 @@ class CustomTextField extends StatelessWidget {
     this.prefix,
     this.onChanged,
     this.contentPadding,
+    this.maxLength,
+    this.inputFormatters,
     super.key,
   });
 
@@ -37,6 +40,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefix;
   final Function(String)? onChanged;
   final EdgeInsetsGeometry? contentPadding;
+  final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +54,8 @@ class CustomTextField extends StatelessWidget {
       style: TextHelper.textFieldTextStyle,
       obscureText: obscureText,
       onChanged: onChanged,
+      maxLength: maxLength,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextHelper.textFieldTextStyle.copyWith(
@@ -72,6 +79,7 @@ class CustomTextField extends StatelessWidget {
               )
             : null,
         contentPadding: contentPadding,
+        counter: const Offstage(),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(

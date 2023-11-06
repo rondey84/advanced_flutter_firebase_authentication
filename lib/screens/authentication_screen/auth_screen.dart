@@ -1,4 +1,5 @@
 import 'package:advanced_flutter_firebase_authentication/core/constants.dart';
+import 'package:advanced_flutter_firebase_authentication/core/extensions/getx_custom_snackbar.dart';
 import 'package:advanced_flutter_firebase_authentication/core/helper/text_helper.dart';
 import 'package:advanced_flutter_firebase_authentication/core/services/app_services.dart';
 import 'package:advanced_flutter_firebase_authentication/widgets/background_scaffold.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pinput/pinput.dart';
 
 part 'auth_controller.dart';
 part 'auth_bindings.dart';

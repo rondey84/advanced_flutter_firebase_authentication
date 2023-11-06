@@ -20,7 +20,23 @@ class _EmailAndPasswordAuthForm extends GetView<AuthController> {
               .animate(delay: controller.pageStartAniDelay * 0.55)
               .moveX(duration: controller.pageAniDuration, begin: 0.1.sw)
               .fadeIn(duration: controller.pageAniDuration),
-          SizedBox(height: 24.r),
+          SizedBox(height: 2.r),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12).r,
+              child: ObxValue((emailErrorMsg) {
+                return Text(
+                  emailErrorMsg.value ?? '',
+                  style: TextHelper.captionTextStyle.copyWith(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.w700,
+                  ),
+                );
+              }, controller.emailErrorMessage),
+            ),
+          ),
+          SizedBox(height: 16.r),
           Obx(() {
             return CustomTextField(
               controller: controller.passwordController,
@@ -35,18 +51,33 @@ class _EmailAndPasswordAuthForm extends GetView<AuthController> {
               .animate(delay: controller.pageStartAniDelay * 0.8)
               .moveX(duration: controller.pageAniDuration, begin: 0.1.sw)
               .fadeIn(duration: controller.pageAniDuration),
-          SizedBox(height: 12.r),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [_forgotPasswordButton()],
+          SizedBox(height: 2.r),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12).r,
+              child: ObxValue((passErrorMsg) {
+                return Text(
+                  passErrorMsg.value ?? '',
+                  style: TextHelper.captionTextStyle.copyWith(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.w700,
+                  ),
+                );
+              }, controller.passwordErrorMessage),
+            ),
+          ),
+          SizedBox(height: 0.r),
+          Align(
+            alignment: Alignment.centerRight,
+            child: _forgotPasswordButton(),
           ),
           SizedBox(height: 30.r),
           GetBuilder<AuthController>(
             id: controller.authStateTag,
             builder: (_) {
               return PrimaryButton(
-                onTap: controller.isAuthInProgress
+                onTap: controller.isEmailAuthInProgress
                     ? null
                     : controller.emailPassOnSubmitHandler,
                 maxHeight: 56,
@@ -56,7 +87,7 @@ class _EmailAndPasswordAuthForm extends GetView<AuthController> {
                     builder: (_) {
                       return AnimatedSwitcher(
                         duration: controller.pageSwitchDuration,
-                        child: controller.isAuthInProgress
+                        child: controller.isEmailAuthInProgress
                             ? Center(
                                 key: const ValueKey('loading'),
                                 child: SpinKitRipple(
@@ -77,7 +108,7 @@ class _EmailAndPasswordAuthForm extends GetView<AuthController> {
                       );
                     }),
               )
-                  .animate(target: controller.isAuthInProgress ? 1 : 0)
+                  .animate(target: controller.isEmailAuthInProgress ? 1 : 0)
                   .desaturate(duration: controller.pageSwitchDuration);
             },
           )
@@ -93,9 +124,7 @@ class _EmailAndPasswordAuthForm extends GetView<AuthController> {
       id: controller.pageTypeSwitcherTag,
       builder: (context) {
         return GestureDetector(
-          onTap: () {
-            // Handle Forgot Password...
-          },
+          onTap: _resetPasswordDialog,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.001),
@@ -127,5 +156,85 @@ class _EmailAndPasswordAuthForm extends GetView<AuthController> {
         .animate(delay: controller.pageStartAniDelay)
         .moveY(duration: controller.pageAniDuration, begin: 16)
         .fadeIn(duration: controller.pageAniDuration);
+  }
+
+  void _resetPasswordDialog() {
+    Get.customDialog(
+      contentPadding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
+      barrierLabel: 'Reset Password Dialog',
+      barrierDismissible: true,
+      child: Form(
+        key: controller.resetFormKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Reset password',
+              style: TextHelper.dialogHeaderTextStyle,
+            ),
+            const SizedBox(height: 30),
+            CustomTextField(
+              controller: controller.resetEmailController,
+              hintText: 'Enter email',
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) => controller.emailValidation(
+                value,
+                isResetEmailValidation: true,
+              ),
+              fillColor: Colors.white.withOpacity(0.05),
+              borderColor: Colors.transparent,
+            ),
+            const SizedBox(height: 4),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12).r,
+                child: ObxValue((emailErrorMsg) {
+                  return Text(
+                    emailErrorMsg.value ?? '',
+                    style: TextHelper.captionTextStyle.copyWith(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  );
+                }, controller.resetEmailErrorMessage),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'An reset link will be sent to your email address for verification.',
+              style: TextHelper.dialogCaptionTextStyle,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: CaptionButton(
+                    onTap: () => Get.close(1),
+                    maxWidth: 160,
+                    text: 'Cancel',
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  flex: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: PrimaryButton(
+                        onTap: controller.resetPassword, text: 'Reset'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ).then((_) {
+      controller.resetEmailController.clear();
+      controller.resetEmailErrorMessage.value = null;
+    });
   }
 }

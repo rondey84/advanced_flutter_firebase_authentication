@@ -97,4 +97,16 @@ class TextHelper {
     fontSize: 14.r,
     fontWeight: FontWeight.normal,
   );
+
+  static final snackBarTitleTextStyle = GoogleFonts.openSans(
+    color: Colors.white.withOpacity(0.9),
+    fontSize: 16.r,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final snackBarMessageTextStyle = GoogleFonts.openSans(
+    color: Colors.white.withOpacity(0.85),
+    fontSize: 12.r,
+    fontWeight: FontWeight.normal,
+  );
 }

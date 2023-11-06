@@ -15,7 +15,7 @@ class SplashController extends GetxController {
   void onReady() {
     if (appServices.initialized) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        appServices.initFirebaseServices();
+        appServices.bootStrap();
       });
     }
     super.onReady();

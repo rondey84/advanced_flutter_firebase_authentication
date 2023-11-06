@@ -73,6 +73,51 @@ class AuthHelper {
     }
   }
 
+  Future<void> resetPassword({required String email}) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email.trim());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // ======= PHONE NUMBER AUTHENTICATION =======
+  Future<void> verifyPhoneNumber(
+    String phoneNumber, {
+    required PhoneCodeSent codeSent,
+    required PhoneVerificationFailed verificationFailed,
+  }) async {
+    try {
+      await _auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // ANDROID ONLY! Sign the user in (or link) with the auto-generated credential
+          await _auth.signInWithCredential(credential);
+        },
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // this.verificationId.value = verificationId;
+        },
+        verificationFailed: verificationFailed,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> verifyOTP(String otp, String verificationId) async {
+    try {
+      await _auth.signInWithCredential(
+        PhoneAuthProvider.credential(
+          verificationId: verificationId,
+          smsCode: otp,
+        ),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   // ======= GOOGLE AUTHENTICATION =======
   Future<void> signInWithGoogle() async {
     googleSignIn ??= GoogleSignIn(scopes: ['email', 'profile']);

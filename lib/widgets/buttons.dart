@@ -221,3 +221,52 @@ class CaptionButton extends StatelessWidget {
     );
   }
 }
+
+class CircularIconButton extends StatelessWidget {
+  const CircularIconButton({
+    required this.onTap,
+    required this.icon,
+    this.radius = 16,
+    super.key,
+  });
+
+  final VoidCallback? onTap;
+  final IconData icon;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      shape: const CircleBorder(),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(radius),
+        splashColor: Colors.green.shade300,
+        splashFactory: InkRipple.splashFactory,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: Colors.teal.shade200.withOpacity(0.4),
+            ),
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [
+                Colors.teal.shade200.withOpacity(0.26),
+                Colors.teal.shade200.withOpacity(0.10),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          width: radius * 2,
+          height: radius * 2,
+          alignment: Alignment.center,
+          child: Icon(icon, size: radius, color: Colors.teal.shade200),
+        ),
+      ),
+    );
+  }
+}
