@@ -282,6 +282,7 @@ class AuthController extends GetxController {
     }
     isOTPMode.value = false;
     phoneAuthErrorMessage.value = null;
+    phoneAuthState.value = _AuthState.initialized;
     _verificationId = null;
   }
 

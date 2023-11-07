@@ -7,7 +7,7 @@ class AppCheckHelper {
     _appCheck = FirebaseAppCheck.instance;
 
     await _appCheck.activate(
-      androidProvider: AndroidProvider.debug,
+      androidProvider: AndroidProvider.playIntegrity,
     );
 
     return this;

@@ -205,7 +205,12 @@ class _FederatedLogins extends GetView<AuthController> {
             ),
             const SizedBox(height: 18),
             CaptionButton(
-              onTap: () => Get.close(1),
+              onTap: () {
+                if (controller.isPhoneAuthInProgressOrComplete) {
+                  return;
+                }
+                Get.close(1);
+              },
               maxWidth: 160,
               text: 'Cancel',
             ),

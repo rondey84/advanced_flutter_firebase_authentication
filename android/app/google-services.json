@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "812979702426-9dso422a1imiaudflo5hsq2vdcqeg45c.apps.googleusercontent.com",
+          "client_id": "812979702426-84l3mutfbph9f9s8uj6ob91igns96gqb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.somen.advanced_flutter_firebase_authentication",
-            "certificate_hash": "82bb82ad37407fd0b8c7eeb8adbc77b64eea91e2"
+            "certificate_hash": "fe82bcbed3eba02341acf85a390f7531b7d53fe2"
           }
         },
         {
